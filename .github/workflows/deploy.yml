@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t jelke-tasks:latest .
+
+      - name: Restart container
+        run: |
+          cd ~/apps/jelke-tasks
+          docker compose up -d

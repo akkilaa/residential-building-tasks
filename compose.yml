@@ -1,0 +1,8 @@
+services:
+    bot:
+      image: jelke-tasks:latest
+      restart: unless-stopped
+      env_file:
+        - .env
+      volumes:
+        - ./bot_state.json:/app/bot_state.json

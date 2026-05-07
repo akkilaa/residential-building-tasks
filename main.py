@@ -47,7 +47,7 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
             name=TaskType.ADD_SALT,
             description=i18n.t(f"tasks.{TaskType.ADD_SALT.value}.title"),
             interval=DAYS_PER_SALT_BAG,
-            notification_resend_interval=0.1,
+            notification_resend_interval=24,
             next_due=datetime.now()
         ),
         # TaskType.CLEAN_GARAGE_DRAIN: GarageDrainTask(
