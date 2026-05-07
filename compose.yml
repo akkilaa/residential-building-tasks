@@ -5,4 +5,4 @@ services:
       env_file:
         - .env
       volumes:
-        - ./bot_state.json:/app/bot_state.json
+        - /opt/jelke-tasks/bot_state.json:/app/bot_state.json
