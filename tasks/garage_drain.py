@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
+import i18n
 from chat import Chat
 from file import CompletionRecord
 from tasks.task import Task, TaskType
@@ -9,7 +10,7 @@ from tasks.task import Task, TaskType
 class GarageDrainTask(Task):
     async def send_reminder(self) -> None:
         await self.chat.send(
-            f"<b>Podsetnik za odrzavanje</b>\n\nZadatak: <b>{self.description}</b>",
+            i18n.t("tasks.generic_reminder", description=self.description),
             reply_markup=Chat.done_keyboard(f"done:{self.name.name}"),
         )
 
@@ -28,7 +29,4 @@ class GarageDrainTask(Task):
         ))
         self._save()
 
-        return (
-            f"Zadatak zavrsen.\n"
-            f"Sledeci podsetnik: <b>{self.next_due.strftime('%d.%m.%Y')}</b>"
-        )
+        return i18n.t("tasks.clean_garage_drain.complete", next_due=self.next_due.strftime("%d.%m.%Y"))

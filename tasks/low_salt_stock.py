@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
+import i18n
 from chat import Chat
 from file import CompletionRecord
 from stock import Stock
@@ -20,15 +21,13 @@ class LowSaltStockTask(Task):
 
     async def send_reminder(self) -> None:
         await self.chat.send(
-            f"<b>Zalihe soli su niske!</b>\n\n"
-            f"Trenutno: <b>{self.stock.salt_bags} kesa</b>\n"
-            f"Narucite nove zalihe i potvrdite koliko dzakova soli je stiglo.",
+            i18n.t("tasks.low_salt_stock.alert", bags=self.stock.salt_bags),
             reply_markup=Chat.done_keyboard(f"done:{self.name.name}"),
         )
 
     async def handle_done_tap(self, query, user_name: str, value: Optional[int] = None) -> None:
         await query.edit_message_text(
-            f"<b>Koliko kesa si narucio?</b>\n\n<i>{user_name} odgovara...</i>",
+            i18n.t("tasks.low_salt_stock.followup_prompt", user_name=user_name),
             parse_mode="HTML",
             reply_markup=Chat.order_keyboard(),
         )
@@ -51,4 +50,4 @@ class LowSaltStockTask(Task):
         ))
         self._save()
 
-        return f"Nova zaliha soli: <b>{self.stock.salt_bags} kesa</b>"
+        return i18n.t("tasks.low_salt_stock.complete", stock=self.stock.salt_bags)

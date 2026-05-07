@@ -10,9 +10,9 @@ if TYPE_CHECKING:
 
 
 class TaskType(Enum):
-    ADD_SALT = "Dodaj tablete soli"
-    CLEAN_GARAGE_DRAIN = "Ocisti garazni slivnik"
-    LOW_SALT_STOCK = "Naruci tablete soli - zalihe su niske"
+    ADD_SALT = "add_salt"
+    CLEAN_GARAGE_DRAIN = "clean_garage_drain"
+    LOW_SALT_STOCK = "low_salt_stock"
 
 
 class Task(ABC):

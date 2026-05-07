@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import i18n
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 
@@ -15,23 +16,17 @@ class Chat(ABC):
     @staticmethod
     def done_keyboard(callback_data: str) -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup([[
-            InlineKeyboardButton("Zavrseno ✓", callback_data=callback_data),
+            InlineKeyboardButton(i18n.t("buttons.done"), callback_data=callback_data),
         ]])
 
     @staticmethod
     def bags_keyboard() -> InlineKeyboardMarkup:
-        return InlineKeyboardMarkup([
-            [
-                InlineKeyboardButton("1 kesa", callback_data="bags:1"),
-                InlineKeyboardButton("2 kese", callback_data="bags:2"),
-                InlineKeyboardButton("3 kese", callback_data="bags:3"),
-            ],
-            [
-                InlineKeyboardButton("4 kese", callback_data="bags:4"),
-                InlineKeyboardButton("5 kesa", callback_data="bags:5"),
-                InlineKeyboardButton("6 kesa", callback_data="bags:6"),
-            ],
-        ])
+        counts = [1, 2, 3, 4, 5, 6]
+        buttons = [
+            InlineKeyboardButton(i18n.t(f"buttons.bags.{n}"), callback_data=f"bags:{n}")
+            for n in counts
+        ]
+        return InlineKeyboardMarkup([buttons[:3], buttons[3:]])
 
     @staticmethod
     def order_keyboard() -> InlineKeyboardMarkup:

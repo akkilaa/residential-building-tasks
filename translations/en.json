@@ -1,0 +1,68 @@
+{
+  "bot": {
+    "startup": "<b>Hello!</b>\n\nBot started."
+  },
+  "tasks": {
+    "generic_reminder": "<b>Maintenance reminder</b>\n\nTask: <b>{description}</b>",
+    "add_salt": {
+      "title": "Add salt tablets",
+      "followup_prompt": "<b>How many bags of salt did you add?</b>\n\n<i>{user_name} is answering...</i>",
+      "bags_required": "Enter number of bags: <code>/done bags=N</code>",
+      "complete": "Added {bags} bags of salt.\nNext task: <b>{next_due}</b>\nSalt stock: <b>{stock} bags</b>"
+    },
+    "clean_garage_drain": {
+      "title": "Clean garage drain",
+      "complete": "Task completed.\nNext reminder: <b>{next_due}</b>"
+    },
+    "low_salt_stock": {
+      "title": "Order salt tablets — stock is low",
+      "alert": "<b>Salt stock is low!</b>\n\nCurrently: <b>{bags} bags</b>\nOrder new stock and confirm how many bags arrived.",
+      "followup_prompt": "<b>How many bags did you order?</b>\n\n<i>{user_name} is answering...</i>",
+      "complete": "Order confirmed. Salt stock: <b>{stock} bags</b>"
+    }
+  },
+  "commands": {
+    "start": {
+      "description": "Start the bot and show commands",
+      "message": "Bot is active!\n\nCommands:\n  /done — mark a task as completed\n  /done bags=3 — add salt (3 bags)\n  /status — show status of all tasks\n  /remind — send reminder now (admin only)\n  /stanje — show stock status"
+    },
+    "done": {
+      "description": "Show tasks awaiting confirmation",
+      "prompt": "<b>Which task did you complete?</b>",
+      "no_tasks": "No available tasks."
+    },
+    "status": {
+      "description": "Show status of all tasks and stock"
+    },
+    "remind": {
+      "description": "Send a reminder now (admin only)",
+      "sent": "Reminders sent to group."
+    },
+    "stock": {
+      "description": "Show stock status",
+      "status": "<b>Stock status</b>\n\nSalt (bags): <b>{bags}</b>"
+    }
+  },
+  "scheduler": {
+    "no_tasks": "No active tasks.",
+    "status": {
+      "header": "<b>Task status</b>\n",
+      "not_scheduled": "not scheduled",
+      "overdue": " (OVERDUE)",
+      "pending": " — awaiting confirmation",
+      "stock_line": "\nSalt stock: <b>{bags} bags</b>{alert}",
+      "order_alert": " — ORDER NOW!"
+    }
+  },
+  "buttons": {
+    "done": "Done ✓",
+    "bags": {
+      "1": "1 bag",
+      "2": "2 bags",
+      "3": "3 bags",
+      "4": "4 bags",
+      "5": "5 bags",
+      "6": "6 bags"
+    }
+  }
+}

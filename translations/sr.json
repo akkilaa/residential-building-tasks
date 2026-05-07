@@ -1,0 +1,68 @@
+{
+  "bot": {
+    "startup": "<b>Zdravo!</b>\n\nBot je pokrenut."
+  },
+  "tasks": {
+    "generic_reminder": "<b>Podsetnik za odrzavanje</b>\n\nZadatak: <b>{description}</b>",
+    "add_salt": {
+      "title": "Dodaj tablete soli",
+      "followup_prompt": "<b>Koliko kesa soli si dodao?</b>\n\n<i>{user_name} odgovara...</i>",
+      "bags_required": "Navedite broj kesa: <code>/done bags=N</code>",
+      "complete": "Dodato {bags} kesa soli.\nSledeci zadatak: <b>{next_due}</b>\nZalihe soli: <b>{stock} kesa</b>"
+    },
+    "clean_garage_drain": {
+      "title": "Ocisti garazni slivnik",
+      "complete": "Zadatak zavrsen.\nSledeci podsetnik: <b>{next_due}</b>"
+    },
+    "low_salt_stock": {
+      "title": "Naruci tablete soli - zalihe su niske",
+      "alert": "<b>Zalihe soli su niske!</b>\n\nTrenutno: <b>{bags} kesa</b>\nNarucite nove zalihe i potvrdite koliko dzakova soli je stiglo.",
+      "followup_prompt": "<b>Koliko kesa si narucio?</b>\n\n<i>{user_name} odgovara...</i>",
+      "complete": "Narudzbina potvrdjena. Zalihe soli: <b>{stock} kesa</b>"
+    }
+  },
+  "commands": {
+    "start": {
+      "description": "Pokretanje bota i prikaz komandi",
+      "message": "Bot je aktivan!\n\nKomande:\n  /done — oznaci zadatak kao zavrsen\n  /done bags=3 — dodavanje soli (3 kese)\n  /status — prikazi status svih zadataka\n  /remind — posalji podsetnik odmah (samo admin)\n  /stanje — prikazi stanje zaliha"
+    },
+    "done": {
+      "description": "Prikazi zadatke koji cekaju potvrdu",
+      "prompt": "<b>Koji zadatak si zavrsio?</b>",
+      "no_tasks": "Nema dostupnih zadataka."
+    },
+    "status": {
+      "description": "Prikazi status svih zadataka i zalihe"
+    },
+    "remind": {
+      "description": "Posalji podsetnik odmah (samo admin)",
+      "sent": "Podsetnici poslati grupi."
+    },
+    "stock": {
+      "description": "Prikazi stanje zaliha",
+      "status": "<b>Stanje zaliha</b>\n\nSo (kese): <b>{bags}</b>"
+    }
+  },
+  "scheduler": {
+    "no_tasks": "Nema aktivnih zadataka.",
+    "status": {
+      "header": "<b>Status zadataka</b>\n",
+      "not_scheduled": "nije zakazano",
+      "overdue": " (PREKORACENO)",
+      "pending": " — ceka potvrdu",
+      "stock_line": "\nZalihe soli: <b>{bags} kesa</b>{alert}",
+      "order_alert": " — NARUCI!"
+    }
+  },
+  "buttons": {
+    "done": "Zavrseno ✓",
+    "bags": {
+      "1": "1 kesa",
+      "2": "2 kese",
+      "3": "3 kese",
+      "4": "4 kese",
+      "5": "5 kesa",
+      "6": "6 kesa"
+    }
+  }
+}

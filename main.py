@@ -12,6 +12,7 @@ from telegram import Update
 from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes
 
 from datetime import datetime
+import i18n
 from tasks import TaskType, AddSaltTask, GarageDrainTask, LowSaltStockTask
 from chat import TelegramChat
 from command import StartCommand, DoneCommand, StatusCommand, RemindCommand, GetStock
@@ -44,7 +45,7 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
             file=file,
             app_state=app_state,
             name=TaskType.ADD_SALT,
-            description=TaskType.ADD_SALT.value,
+            description=i18n.t(f"tasks.{TaskType.ADD_SALT.value}.title"),
             interval=DAYS_PER_SALT_BAG,
             notification_resend_interval=0.1,
             next_due=datetime.now()
@@ -54,7 +55,7 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
         #     file=file,
         #     app_state=app_state,
         #     name=TaskType.CLEAN_GARAGE_DRAIN,
-        #     description=TaskType.CLEAN_GARAGE_DRAIN.value,
+        #     description=i18n.t(f"tasks.{TaskType.CLEAN_GARAGE_DRAIN.value}.title"),
         #     interval=GARAGE_DRAIN_INTERVAL_DAYS,
         #     notification_resend_interval=NOTIFICATION_RESEND_INTERVAL_HOURS,
         # ),
@@ -64,7 +65,7 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
             file=file,
             app_state=app_state,
             name=TaskType.LOW_SALT_STOCK,
-            description=TaskType.LOW_SALT_STOCK.value,
+            description=i18n.t(f"tasks.{TaskType.LOW_SALT_STOCK.value}.title"),
             interval=0,
             notification_resend_interval=72,
         ),
@@ -102,6 +103,7 @@ def make_handler(command, scheduler, app_state):
 
 async def post_init(app: Application) -> None:
     scheduler = app.bot_data["scheduler"]
+    await app.bot.set_my_commands([cmd.to_bot_command() for cmd in scheduler.commands])
     asyncio.create_task(scheduler.start())
 
 
@@ -113,6 +115,8 @@ def main():
         format="%(asctime)s [%(levelname)s] %(message)s",
         level=logging.INFO,
     )
+
+    i18n.load()
 
     app = Application.builder().token(BOT_TOKEN).post_init(post_init).build()
 

@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
+import i18n
 from chat import Chat
 from file import CompletionRecord
 from stock import Stock
@@ -18,13 +19,13 @@ class AddSaltTask(Task):
 
     async def send_reminder(self) -> None:
         await self.chat.send(
-            f"<b>Podsetnik za odrzavanje</b>\n\nZadatak: <b>{self.description}</b>",
+            i18n.t("tasks.generic_reminder", description=self.description),
             reply_markup=Chat.done_keyboard(f"done:{self.name.name}"),
         )
 
     async def handle_done_tap(self, query, user_name: str, value: Optional[int] = None) -> None:
         await query.edit_message_text(
-            f"<b>Koliko kesa soli si dodao?</b>\n\n<i>{user_name} odgovara...</i>",
+            i18n.t("tasks.add_salt.followup_prompt", user_name=user_name),
             parse_mode="HTML",
             reply_markup=Chat.bags_keyboard(),
         )
@@ -36,7 +37,7 @@ class AddSaltTask(Task):
     async def complete_task(self, completed_by: str, options: dict) -> str:
         bags = options.get("bags", 0)
         if bags <= 0:
-            return "Navedite broj kesa: <code>/done bags=N</code>"
+            return i18n.t("tasks.add_salt.bags_required")
 
         now = datetime.now()
         self.complete(completed_by)
@@ -51,8 +52,9 @@ class AddSaltTask(Task):
         ))
         self._save()
 
-        return (
-            f"Dodato {bags} kesa soli.\n"
-            f"Sledeci zadatak: <b>{self.next_due.strftime('%d.%m.%Y')}</b>\n"
-            f"Zalihe soli: <b>{self.stock.salt_bags} kesa</b>"
+        return i18n.t(
+            "tasks.add_salt.complete",
+            bags=bags,
+            next_due=self.next_due.strftime("%d.%m.%Y"),
+            stock=self.stock.salt_bags,
         )
