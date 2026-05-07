@@ -1,4 +1,4 @@
-# Jelke Tasks
+# Residential building-tasks
 
 A Telegram bot for managing recurring maintenance tasks in a residential building. Residents receive scheduled reminders directly in a group chat, confirm completion with a single button tap, and the bot automatically reschedules the next occurrence.
 
@@ -6,12 +6,17 @@ A Telegram bot for managing recurring maintenance tasks in a residential buildin
 
 ## What this solves
 
-Running a residential building means repeating the same maintenance tasks on a schedule — adding salt tablets to the water softener, cleaning the garage drain, ordering supplies before they run out. Without a system, tasks get forgotten, done late, or duplicated.
+Running a residential building means repeating the same maintenance tasks on a schedule: 
+- Adding salt tablets to the water softener
+- Cleaning the garage drain
+- Ordering supplies before they run out
+
+Without a system, tasks get forgotten, done late, or duplicated.
 
 This bot:
 - Sends reminders to a Telegram group at the right time
 - Re-sends the reminder on a configured interval until someone confirms
-- Lets any resident mark a task done directly from the chat — no app, no login
+- Lets any resident mark a task done directly from the chat no app, no login
 - Tracks who completed each task and when
 - Monitors consumable stock (salt bags) and alerts the group when supplies are low
 - Logs the full completion history to a JSON file
@@ -20,7 +25,7 @@ This bot:
 
 ## Built around Telegram
 
-The only interface residents need is Telegram — an app most people already have. The bot posts to a shared group chat, so everyone sees the reminders and completions without needing to install anything extra.
+The only interface residents need is Telegram, an app most people already have. The bot posts to a shared group chat, so everyone sees the reminders and completions without needing to install anything extra.
 
 Tasks are confirmed with inline buttons. For multi-step tasks (like adding salt), the bot guides through a short follow-up to record how many bags were added, then automatically calculates the next due date based on that quantity.
 
@@ -28,7 +33,7 @@ Tasks are confirmed with inline buttons. For multi-step tasks (like adding salt)
 
 ## Adaptable for any building or property
 
-The project is designed to be easy to extend. Each task type is its own class — adding a new recurring task means creating a small file following the same pattern as the existing ones. The scheduler, persistence, and notification logic require no changes.
+The project is designed to be easy to extend. Each task type is its own class, adding a new recurring task means creating a small file following the same pattern as the existing ones. The scheduler, persistence, and notification logic require no changes.
 
 Good candidates for additional tasks:
 - Filter replacements
@@ -43,10 +48,10 @@ Good candidates for additional tasks:
 
 All messages sent to Telegram are stored in translation files under `translations/`. The active language is set at startup. Two locales are included out of the box:
 
-- `sr` — Serbian (default)
-- `en` — English
+- `sr` - Serbian (default)
+- `en` - English
 
-Switching languages or adding a new one requires no code changes — only a new JSON file in `translations/`.
+Switching languages or adding a new one requires no code changes - only a new JSON file in `translations/`.
 
 ---
 
