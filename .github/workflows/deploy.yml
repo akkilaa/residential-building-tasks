@@ -15,4 +15,4 @@ jobs:
         run: docker build -t jelke-tasks:latest .
 
       - name: Deploy
-        run: docker compose -f /apps/jelke-taskscompose.yml up -d
+        run: docker compose -f /apps/jelke-tasks/compose.yml up -d
