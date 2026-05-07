@@ -40,7 +40,7 @@ class DoneCommand(Command):
     name = "done"
 
     async def handle(self, update: Update, ctx: ContextTypes.DEFAULT_TYPE, scheduler, app_state) -> None:
-        tasks = [t for t in scheduler.tasks.values() if t.interval > 0 or t.pending]
+        tasks = [t for t in scheduler.tasks.values()]
         if not tasks:
             await update.message.reply_text(i18n.t("commands.done.no_tasks"))
             return
