@@ -13,6 +13,7 @@ class TaskType(Enum):
     ADD_SALT = "add_salt"
     CLEAN_GARAGE_DRAIN = "clean_garage_drain"
     LOW_SALT_STOCK = "low_salt_stock"
+    CHANGE_WATER_FILTER = "change_water_filter"
 
 
 class Task(ABC):

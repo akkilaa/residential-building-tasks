@@ -71,6 +71,6 @@ class GetStock(Command):
 
     async def handle(self, update: Update, ctx: ContextTypes.DEFAULT_TYPE, scheduler, app_state) -> None:
         await update.message.reply_text(
-            i18n.t("commands.stock.status", bags=app_state.stock.salt_bags),
+            i18n.t("commands.stock.status", bags=app_state.stock.salt_bags, filters=app_state.stock.filters),
             parse_mode="HTML",
         )

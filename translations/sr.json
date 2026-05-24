@@ -14,6 +14,10 @@
       "title": "Ocisti garazni slivnik",
       "complete": "Zadatak zavrsen.\nSledeci podsetnik: <b>{next_due}</b>"
     },
+    "change_water_filter": {
+      "title": "Promeni filter vode",
+      "complete": "Filter vode promenjen.\nSledeci podsetnik: <b>{next_due}</b>\nFilteri na stanju: <b>{filters}</b>"
+    },
     "low_salt_stock": {
       "title": "Naruci tablete soli - zalihe su niske",
       "alert": "<b>Zalihe soli su niske!</b>\n\nTrenutno: <b>{bags} kesa</b>\nNarucite nove zalihe i potvrdite koliko dzakova soli je stiglo.",
@@ -40,7 +44,7 @@
     },
     "stock": {
       "description": "Prikazi stanje zaliha",
-      "status": "<b>Stanje zaliha</b>\n\nSo (kese): <b>{bags}</b>"
+      "status": "<b>Stanje zaliha</b>\n\nSo (kese): <b>{bags}</b>\nFilteri: <b>{filters}</b>"
     }
   },
   "scheduler": {

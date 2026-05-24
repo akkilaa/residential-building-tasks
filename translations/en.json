@@ -14,6 +14,10 @@
       "title": "Clean garage drain",
       "complete": "Task completed.\nNext reminder: <b>{next_due}</b>"
     },
+    "change_water_filter": {
+      "title": "Change water filter",
+      "complete": "Water filter changed.\nNext reminder: <b>{next_due}</b>\nFilters in stock: <b>{filters}</b>"
+    },
     "low_salt_stock": {
       "title": "Order salt tablets — stock is low",
       "alert": "<b>Salt stock is low!</b>\n\nCurrently: <b>{bags} bags</b>\nOrder new stock and confirm how many bags arrived.",
@@ -40,7 +44,7 @@
     },
     "stock": {
       "description": "Show stock status",
-      "status": "<b>Stock status</b>\n\nSalt (bags): <b>{bags}</b>"
+      "status": "<b>Stock status</b>\n\nSalt (bags): <b>{bags}</b>\nFilters: <b>{filters}</b>"
     }
   },
   "scheduler": {

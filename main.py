@@ -13,7 +13,7 @@ from telegram.ext import Application, CallbackQueryHandler, CommandHandler, Cont
 
 from datetime import datetime
 import i18n
-from tasks import TaskType, AddSaltTask, GarageDrainTask, LowSaltStockTask
+from tasks import TaskType, AddSaltTask, GarageDrainTask, LowSaltStockTask, ChangeWaterFilterTask
 from chat import TelegramChat
 from command import StartCommand, DoneCommand, StatusCommand, RemindCommand, GetStock
 from file import JsonFile, AppState
@@ -32,6 +32,8 @@ SALT_LOW_STOCK_THRESHOLD = int(os.getenv("SALT_LOW_STOCK_THRESHOLD", "2"))
 SALT_INITIAL_STOCK = int(os.getenv("SALT_INITIAL_STOCK", "10"))
 SCHEDULER_CHECK_INTERVAL = int(os.getenv("SCHEDULER_CHECK_INTERVAL", "3600"))
 GARAGE_DRAIN_INTERVAL_DAYS = int(os.getenv("GARAGE_DRAIN_INTERVAL_DAYS", "30"))
+WATER_FILTER_INTERVAL_DAYS = int(os.getenv("WATER_FILTER_INTERVAL_DAYS", "180"))
+FILTER_INITIAL_STOCK = int(os.getenv("FILTER_INITIAL_STOCK", "1"))
 
 # ─── WIRING ──────────────────────────────────────────────────────────────────
 
@@ -69,6 +71,16 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
             interval=0,
             notification_resend_interval=72,
         ),
+        TaskType.CHANGE_WATER_FILTER: ChangeWaterFilterTask(
+            stock=app_state.stock,
+            chat=chat,
+            file=file,
+            app_state=app_state,
+            name=TaskType.CHANGE_WATER_FILTER,
+            description=i18n.t(f"tasks.{TaskType.CHANGE_WATER_FILTER.value}.title"),
+            interval=WATER_FILTER_INTERVAL_DAYS,
+            notification_resend_interval=168,
+        ),
     }
 
 
@@ -78,6 +90,7 @@ def build_scheduler(bot, app_state, file) -> Scheduler:
     if is_first_run:
         app_state.stock.salt_bags = SALT_INITIAL_STOCK
         app_state.stock.low_stock_threshold = SALT_LOW_STOCK_THRESHOLD
+        app_state.stock.filters = FILTER_INITIAL_STOCK
 
     chat = TelegramChat(bot, GROUP_CHAT_ID)
     tasks = build_tasks(chat, file, app_state)
