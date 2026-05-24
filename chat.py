@@ -31,10 +31,13 @@ class Chat(ABC):
     @staticmethod
     def order_keyboard() -> InlineKeyboardMarkup:
         return InlineKeyboardMarkup([[
+            InlineKeyboardButton("4",  callback_data="order:4"),
             InlineKeyboardButton("5",  callback_data="order:5"),
+            InlineKeyboardButton("6",  callback_data="order:6"),
+            InlineKeyboardButton("7",  callback_data="order:7"),
+            InlineKeyboardButton("8",  callback_data="order:8"),
+            InlineKeyboardButton("9",  callback_data="order:9"),
             InlineKeyboardButton("10", callback_data="order:10"),
-            InlineKeyboardButton("15", callback_data="order:15"),
-            InlineKeyboardButton("20", callback_data="order:20"),
         ]])
 
     @abstractmethod
