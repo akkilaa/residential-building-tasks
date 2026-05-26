@@ -27,7 +27,7 @@ class Scheduler:
 
     async def start(self) -> None:
         logger.info("Scheduler started.")
-        await self.chat.send(i18n.t("bot.startup"))
+        # await self.chat.send(i18n.t("bot.startup"))
         while True:
             await self.check_due()
             await asyncio.sleep(self.check_interval)
