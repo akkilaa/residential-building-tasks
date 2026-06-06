@@ -69,7 +69,7 @@ def build_tasks(chat: TelegramChat, file: JsonFile, app_state: AppState) -> dict
             name=TaskType.LOW_SALT_STOCK,
             description=i18n.t(f"tasks.{TaskType.LOW_SALT_STOCK.value}.title"),
             interval=0,
-            notification_resend_interval=72,
+            notification_resend_interval=168,
         ),
         TaskType.CHANGE_WATER_FILTER: ChangeWaterFilterTask(
             stock=app_state.stock,
